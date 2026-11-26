@@ -316,6 +316,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .reg-steps b{color:var(--ink)}
 .float-reg{position:fixed;left:16px;bottom:16px;z-index:35;background:var(--green);color:#fff;font-weight:800;text-decoration:none;padding:12px 18px;border-radius:999px;box-shadow:0 8px 22px rgba(0,0,0,.2);font-size:15px}
 .float-reg:hover{filter:brightness(1.05)}
+.narx-info{margin-top:10px;font-size:13.5px;color:var(--green);font-weight:600}
+.soldout{opacity:.55}
+.soldout .pimg img{filter:grayscale(1)}
 .kat-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:30px}
 .kat{display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;align-items:center}
 .kat-cover{flex:none;width:130px;border:0;padding:0;background:none;cursor:pointer;border-radius:12px;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.15);transition:transform .2s}
@@ -451,6 +454,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <span class="eyebrow">Xarid qilish</span>
       <h2>Katalog</h2>
       <p class="lead">Mahsulotlarni savatchaga qo'shing va bitta tugma bilan buyurtmani Telegram orqali yuboring. Men siz bilan bog'lanib, yetkazib berishni kelishib olaman.</p>
+      <p class="narx-info" id="narxInfo">Narxlar Faberlic'dan yangilanmoqda…</p>
       <input type="search" id="search" class="search" placeholder="🔍 Mahsulot nomi yoki artikuli bo'yicha qidirish…" aria-label="Mahsulot qidirish">
       <div class="filters" id="filters"></div>
       <div class="cat-note" id="catNote" hidden></div>
@@ -895,7 +899,7 @@ const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-
 const TOIFA_IZOH = {
   "Oyoq parvarishi": "<b>Oyoq parvarishi.</b> Oyoq terlashiga qarshi Expert Pharma antiperspirant spreyi, quruq va yorilgan tovon uchun 35% mochevinali krem, charchagan oyoqlar uchun gel va har kungi namlovchi kremlar.",
   "Soch bo'yoqlari": "<b>Har xil rangdagi soch bo'yoqlari.</b> Expert turg'un krem-bo'yog'i 26 xil rangda, ipak aminokislotali Salon Care bo'yog'i 5 xil rangda. Kerakli rangni buyurtmada yozing yoki sochingiz rasmini yuboring — rang tanlashda yordam beraman.",
-  "Retinol 24/7 seriyasi": "<b>Retinol 24/7 — yuz uchun to'liq parvarish seriyasi.</b> Kundalik tartib: 1) tozalovchi sut → 2) yuvish geli → 3) lifting-toner → 4) kunduzgi krem → 5) tungi krem. Beshalasi birga: <b>239 500 so'm</b> <s>555 000 so'm</s>.<br><button class=\"btn btn-primary btn-sm\" style=\"margin-top:12px\" data-add-tur=\"Retinol 24/7 seriyasi\">Butun seriyani savatchaga qo'shish</button>",
+  "Retinol 24/7 seriyasi": "<b>Retinol 24/7 — yuz uchun to'liq parvarish seriyasi.</b> Kundalik tartib: 1) tozalovchi sut → 2) yuvish geli → 3) lifting-toner → 4) kunduzgi krem → 5) tungi krem. Beshalasi birga: <b>{RETINOL_NARX}</b> <s>{RETINOL_ESKI}</s>.<br><button class=\"btn btn-primary btn-sm\" style=\"margin-top:12px\" data-add-tur=\"Retinol 24/7 seriyasi\">Butun seriyani savatchaga qo'shish</button>",
   "TeenSkin 12+ (muammoli teri)": "<b>12 yoshdan katta o'smirlar va muammoli teri uchun.</b> TeenSkin seriyasi terini chuqur tozalaydi, qora nuqtalar va yallig'lanishlarga qarshi parvarish qiladi: yuvish geli, gidrofil gel-moy, salitsil kislotali zardob, nuqtali krem va patchlar.",
   "Yuz tozalovchilari": "<b>Har kungi tozalash.</b> Gidrofil moylar (shu jumladan vitamin C li), mitsellyar suvlar, yuvish gellari va ko'piklar — makiyaj va kir terini yumshoq tozalaydi.",
   "Naborlar va Royal": "<b>Sovg'a uchun.</b> Hozir onlayn do'konda bor naborlar va Royal seriyasi. Bosma katalogdagi boshqa naborlarni artikuli bo'yicha buyurtma qilsangiz, men topib beraman.",
@@ -903,7 +907,10 @@ const TOIFA_IZOH = {
   "Salomatlik (BFQ)": "<div class=\"bfq\"><span><i>B</i>Biologik</span><span><i>F</i>Faol</span><span><i>Q</i>Qo'shimcha</span></div><b>Salomatlikning har kungi hamrohi.</b> Faberlic biologik faol qo'shimchalari <b>(BFQ)</b> — tabiiy tarkibli mahsulotlar. Ular dori emas: kundalik ovqatlanishni to'ldirib, organizmni har kuni qo'llab-quvvatlash uchun ishlatiladi. Oilaning har bir a'zosi uchun — bolalar seriyasidan tortib kattalargacha — mos mahsulotlar bor. Har bir mahsulotning yosh chegarasi va qabul qilish tartibi qadog'ida yozilgan; tanlashda yordam beraman."
 };
 $("#catNote").addEventListener("click", e => { const b = e.target.closest("[data-add-tur]"); if (!b) return; PRODUCTS.forEach((p, i) => { if (p.tur === b.dataset.addTur) cart[i] = (cart[i] || 0) + 1; }); save(); renderCart(); toast("Butun seriya savatchaga qo'shildi"); });
-function showCatNote(){ const n = $("#catNote"); const t = TOIFA_IZOH[cat]; n.hidden = !t; if (t) n.innerHTML = t; }
+function showCatNote(){ const n = $("#catNote"); let t = TOIFA_IZOH[cat]; n.hidden = !t; if (!t) return;
+  const r = PRODUCTS.filter(p => p.tur === "Retinol 24/7 seriyasi");
+  t = t.replace("{RETINOL_NARX}", fmt(r.reduce((a, p) => a + p.narx, 0))).replace("{RETINOL_ESKI}", fmt(r.reduce((a, p) => a + (p.eski || p.narx), 0)));
+  n.innerHTML = t; }
 let qidiruv = "";
 $("#search").addEventListener("input", e => { qidiruv = e.target.value.trim().toLowerCase(); renderProducts(); });
 function renderFilters(){
@@ -921,8 +928,9 @@ function renderProducts(){
     el.innerHTML = `<div class="pimg">${icon}${p.rasm ? `<img src="${p.rasm}" alt="" loading="lazy" onerror="this.remove()">` : ""}${off ? `<span class="off">−${off}%</span>` : ""}</div>
       <div class="pbody">${p.xit ? '<span class="tag">Xit</span>' : `<span class="tag">${p.tur}</span>`}
       <h3></h3><p>Art: ${p.art || "—"}</p>
-      <div class="price ${p.narx ? "" : "ask"}">${p.narx ? fmt(p.narx) : "Narxini so'rang"}${off ? ` <s>${fmt(p.eski)}</s>` : ""}</div>
+      <div class="price ${p.narx && !p.yoq ? "" : "ask"}">${p.yoq ? "Hozir sotuvda yo'q" : p.narx ? fmt(p.narx) : "Narxini so'rang"}${off && !p.yoq ? ` <s>${fmt(p.eski)}</s>` : ""}</div>
       <button class="btn btn-primary btn-sm add">Savatchaga</button></div>`;
+    if (p.yoq) el.classList.add("soldout");
     el.querySelector("h3").textContent = p.nom; el.querySelector("img") && (el.querySelector("img").alt = p.nom);
     const btn = el.querySelector(".add");
     btn.onclick = () => { addToCart(i); btn.classList.add("added"); btn.textContent = "Qo'shildi ✓"; setTimeout(() => { btn.classList.remove("added"); btn.textContent = "Savatchaga"; }, 1200); };
@@ -1056,6 +1064,52 @@ document.addEventListener("keydown", e => { if ($("#viewer").hidden) return;
 let tx = null; $("#vStage").addEventListener("touchstart", e => tx = e.touches[0].clientX, { passive: true });
 $("#vStage").addEventListener("touchend", e => { if (tx === null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) korsat(V.i + (d < 0 ? 1 : -1)); tx = null; });
 katalogYukla();
+
+/* ===== NARXLAR: har ochilganda Faberlic'dan jonli yangilanadi ===== */
+async function jonliNarxlar(){
+  const info = $("#narxInfo");
+  const kod = p => p.rasm.replace(/^rasmlar\//, "").replace(/\.jpg$/, "");
+  const codes = [...new Set(PRODUCTS.map(kod))]; const live = {};
+  try {
+    for (let i = 0; i < codes.length; i += 40) {
+      const qs = codes.slice(i, i + 40).map(c => "codes%5B%5D=" + encodeURIComponent(c)).join("&");
+      const j = await (await fetch(`https://faberlic.com/flecom/api/v1/products/find_by_codes?baseStore=UZB_9300&nextPeriodPriceEnabled=false&priceGroup=ZERO&language=ru&${qs}`)).json();
+      const arr = Array.isArray(j.data) ? j.data : Object.values(j.data || {});
+      arr.forEach(p => { if (p && p.code) live[p.code] = p; });
+    }
+    if (!Object.keys(live).length) throw new Error("bo'sh");
+    let yoq = 0;
+    PRODUCTS.forEach(p => { const l = live[kod(p)];
+      if (!l) { p.yoq = true; yoq++; return; }
+      p.yoq = !(l.inStock && l.availableSale !== false); if (p.yoq) yoq++;
+      if (l.price) p.narx = l.price; if (l.basePrice) p.eski = l.basePrice; });
+    renderProducts(); renderCart(); if (!$("#catNote").hidden) showCatNote();
+    const d = new Date(); info.textContent = `✓ Narxlar Faberlic'dan avtomatik olindi: ${d.toLocaleDateString("ru-RU")}, ${d.toLocaleTimeString("ru-RU", {hour: "2-digit", minute: "2-digit"})}` + (yoq ? ` · ${yoq} ta mahsulot hozir sotuvda yo'q` : "");
+  } catch (e) { info.textContent = "Narxlar oxirgi saqlangan holatda. Aniq narxni buyurtmada tasdiqlayman."; }
+}
+jonliNarxlar();
+
+/* ===== AKSIYA: joriy asosiy katalog orqa muqovasidan avtomatik ===== */
+async function aksiyaYangila(){
+  try {
+    const list = (await (await fetch(`${FL}?${FL_Q}`)).json()).data || [];
+    const k = list.find(x => x.kind === "mainCatalog") || list[0]; if (!k) return;
+    const m = await (await fetch(`${FL}/${k.id}?${FL_Q}`)).json(); const n = m.metadata?.pageCount; if (!n) return;
+    const pj = await (await fetch(`${FL}/${k.id}/pages?baseStore=UZB_9300&page=${n}&size=1&language=ru`)).json();
+    const last = (pj.data || []).find(p => p.number === n) || (pj.data || [])[0]; if (!last) return;
+    const a = $("#aksiya"); const img = a.querySelector(".promo-img img");
+    img.src = imgW(last.imageUrl); a.querySelector(".promo-img").href = last.imageUrl;
+    const sana = (k.title.match(/\(([^)]+)\)/) || [])[1] || "";
+    if (k.id !== 1333) {   // yangi katalog: eski matnni yashirib, joriy muqovani ko'rsatamiz
+      a.querySelector(".promo-badge").textContent = "Joriy aksiya" + (sana ? " · " + sana : "");
+      a.querySelector("h3").innerHTML = "Joriy katalogdagi <em>aksiya</em>";
+      a.querySelector(".promo-price").textContent = "Aksiya shartlari rasmda — ustiga bosib kattalashtiring.";
+      a.querySelector(".promo-steps").hidden = true;
+      a.querySelector("small").textContent = `${k.title}. Batafsil ma'lumotni men orqali oling.`;
+    }
+  } catch (e) { /* internet bo'lmasa saqlangan aksiya qoladi */ }
+}
+aksiyaYangila();
 
 /* paydo bo'lish animatsiyasi */
 const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), {threshold:.1});

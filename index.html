@@ -838,7 +838,7 @@ const CONFIG = {
   shahar: "Surxondaryo viloyati, Denov shahri", // shahringiz
   telefon: "+998904119888",       // telefon (Telegram ham shu raqamga ulangan)
   telegramKanal: "flbarno",       // Telegram kanal
-  instagram: "barno_israilovna",  // Instagram username, @ belgisisiz
+  instagram: "barno__fl",         // Instagram username, @ belgisisiz
   royxat: "https://faberlic.com/register?sponsornumber=706247875&lang=ru&r=1000034185670", // jamoaga ro'yxatdan o'tish havolasi
   taplink: "https://taplink.cc/flbarno",
   surat: "men.jpg",               // suratingiz fayli, masalan "men.jpg" (shu papkaga qo'ying)
@@ -877,7 +877,7 @@ const toast = m => { const t = $("#toast"); t.textContent = m; t.classList.add("
 /* shaxsiy ma'lumotlar */
 $$(".js-name").forEach(e => e.textContent = CONFIG.ism);
 $$(".js-city").forEach(e => e.textContent = CONFIG.shahar);
-$$(".js-tg").forEach(a => { a.href = tg(); a.target = "_blank"; a.rel = "noopener"; });
+$$(".js-tg").forEach(a => { a.href = "https://t.me/" + CONFIG.telegramKanal; a.target = "_blank"; a.rel = "noopener"; }); /* Telegram tugmalari — kanal */
 $$(".js-ig").forEach(a => { a.href = "https://instagram.com/" + CONFIG.instagram; a.target = "_blank"; a.rel = "noopener"; });
 const ext = (sel, url) => $$(sel).forEach(a => { a.href = url; a.target = "_blank"; a.rel = "noopener"; });
 ext(".js-tg-channel", "https://t.me/" + CONFIG.telegramKanal);

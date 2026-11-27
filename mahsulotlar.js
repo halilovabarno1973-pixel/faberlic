@@ -24,9 +24,9 @@ const PRODUCTS = [
   ["Ayollar parvarishi", "I Love Winter «Intensiv oziqlantirish» qo'l kremi, 75 ml", "12174", 36900, 0, "010803-071349"],
   ["Ayollar parvarishi", "Zima himoya qo'l kremi, 75 ml", "12176", 36900, 0, "01080102-071351"],
   ["Ayollar parvarishi", "L.OVE «Oziqlantirish va tiklash» qo'l kremi, 70 ml", "2610", 23900, 0, "010803-107173"],
-  ["Ayollar parvarishi", "Pour Toujours atirli dush geli", "8125", 42900, 73900, "010603-032734"],
-  ["Ayollar parvarishi", "«Tuberoza va mushk» atirli dush geli", "8049", 60900, 123000, "010603-106849"],
-  ["Ayollar parvarishi", "Mystic Cherry atirli dush geli", "2011", 60900, 123000, "010603-065858"],
+  ["Shaxsiy gigiyena", "Pour Toujours atirli dush geli", "8125", 42900, 73900, "010603-032734"],
+  ["Shaxsiy gigiyena", "«Tuberoza va mushk» atirli dush geli", "8049", 60900, 123000, "010603-106849"],
+  ["Shaxsiy gigiyena", "Mystic Cherry atirli dush geli", "2011", 60900, 123000, "010603-065858"],
 
   ["Ayollar shampunlari", "«Qora sedana» soch to'kilishiga qarshi shampun", "10319", 31900, 73900, "01070302-064298"],
   ["Ayollar shampunlari", "Oxy Hair kislorodli shampun", "10300", 102000, 144000, "01070303-062963"],
@@ -90,8 +90,8 @@ const PRODUCTS = [
   ["Uy tozalovchilari", "Grizzly «Zangga qarshi» vanna va hojatxona tozalagichi", "30117", 54900, 103000, "011009-094154"],
   ["Uy tozalovchilari", "Grizzly «Yog'ga qarshi» oshxona tozalagichi", "30118", 54900, 103000, "011002-066962"],
   ["Uy tozalovchilari", "«Sitrus kuchi» duxovka va plita tozalagichi", "30119", 37900, 91900, "011002-00415"],
-  ["Tish pastalari", "Expert Pharma «Kompleks parvarish» tish pastasi", "3871", 40900, 81900, "010601-071915"],
-  ["Tish pastalari", "Expert Pharma «Kundalik oqartirish» tish pastasi", "3870", 40900, 81900, "010601-071910"],
+  ["Shaxsiy gigiyena", "Expert Pharma «Kompleks parvarish» tish pastasi", "3871", 40900, 81900, "010601-071915"],
+  ["Shaxsiy gigiyena", "Expert Pharma «Kundalik oqartirish» tish pastasi", "3870", 40900, 81900, "010601-071910"],
 
   ["Qadoqlar", "«Yangi yil ertagi» sovg'a paketi", "781073", 15900, 15900, "020602-084591"],
   ["Qadoqlar", "«Bayram aksentlari» sovg'a paketi", "781072", 11900, 11900, "020602-084587"],
@@ -118,7 +118,7 @@ const PRODUCTS = [
   ["Bolalar uchun", "Umooo 3+ ftorsiz bolalar tish pastasi","2886",17900,40900,"010601-039900"],
   ["Bolalar uchun", "Umooo 3+ «Chernikali maffin» dush geli","8052",36900,81900,"010603-099709"],
   ["Bolalar uchun", "Umooo 3+ «Qulupnayli milksheyk» dush geli","8051",36900,81900,"010603-099708"],
-  ["Tish pastalari", "Kislorodli tish pastasi «Oqartirish va ekstra salqinlik»","3881",21900,50900,"010601-084383"],
+  ["Shaxsiy gigiyena", "Kislorodli tish pastasi «Oqartirish va ekstra salqinlik»","3881",21900,50900,"010601-084383"],
   ["Uy tozalovchilari", "«Oqartirish effekti» vannaxona tozalagichi","30231",35900,81900,"011002-066727"],
   ["Uy tozalovchilari", "«Dengiz salqini» hojatxona smart-geli","30294",39900,91900,"011002-066720"],
   ["Uy tozalovchilari", "«Baxmal orxideya» hidni yo'qotuvchi oshxona krem-sovuni","30222",27900,71900,"011002-066746"],
@@ -215,10 +215,10 @@ const PRODUCTS = [
   ["Dekorativ kosmetika", "Turbo Fast Dry tez quriydigan tirnoq laki","71069-71083",60900,81900,"0199-060888"],
   ["Dekorativ kosmetika", "It's Collagen laminatsiya effektli qosh geli","5021",50900,103000,"01020101-063843"],
   ["Dekorativ kosmetika", "Hyaluronic Makeup gialuronli lab yaltiroq-moyi","42101",40900,81900,"01020202-072210"],
-  ["Erkaklar parvarishi", "Blockbuster dezodorant-antiperspirant","8038",36900,67900,"010602-102464"],
+  ["Shaxsiy gigiyena", "Blockbuster dezodorant-antiperspirant","8038",36900,67900,"010602-102464"],
   ["Erkaklar parvarishi", "Blockbuster yuz kremi 7 in 1","12236",36900,67900,"01080201-100671"],
-  ["Ayollar parvarishi", "Delicate Green dezodorant-antiperspirant","2591",25900,61900,"010602-00148"],
-  ["Ayollar parvarishi", "Ultra sharikli dezodorant-antiperspirant","2678",44900,81900,"010602-013235"],
+  ["Shaxsiy gigiyena", "Delicate Green dezodorant-antiperspirant","2591",25900,61900,"010602-00148"],
+  ["Shaxsiy gigiyena", "Ultra sharikli dezodorant-antiperspirant","2678",44900,81900,"010602-013235"],
 
   // --- Qo'shimcha toifalar (2026-11-26) ---
   ["Moda va aksessuarlar","Ayollar tout-sumkasi, shokolad rang","880520",779000,1107000,"02060501-105672"],
@@ -255,5 +255,23 @@ const PRODUCTS = [
   ["Erkaklar atirlari","Incognito (erkaklar)","3931",115000,164000,"010502-092304"],
   ["Erkaklar atirlari","Pacific (erkaklar)","3922",115000,164000,"010502-083005"],
   ["Erkaklar atirlari","Faberlic by Valentin Yudashkin parfyum suvi (erkaklar)","3227",410000,615000,"010502-058404"],
-  ["Erkaklar atirlari","Artefact (erkaklar)","3252",348000,472000,"010502-027382"]
+  ["Erkaklar atirlari","Artefact (erkaklar)","3252",348000,472000,"010502-027382"],
+
+  // --- Qo'shimcha toifalar (2026-11-26) ---
+  ["Shaxsiy gigiyena","Kislorodli tish pastasi «Milklar salomatligi»","3880",21900,50900,"010601-084382"],
+  ["Shaxsiy gigiyena","Bubble White mandarinli oqartiruvchi tish pastasi","8883",30900,54900,"010601-099697"],
+  ["Shaxsiy gigiyena","Delicate Whitening 24K Pure Gold tish pastasi","8040",77900,103000,"010601-097566"],
+  ["Shaxsiy gigiyena","Expert Pharma «Kompleks parvarish» og'iz chayqatgichi","3878",46900,103000,"010601-072233"],
+  ["Shaxsiy gigiyena","Expert Pharma «Karashga qarshi» og'iz chayqatgichi","3877",36900,81900,"010601-071927"],
+  ["Shaxsiy gigiyena","Bubble White uzumli og'iz chayqatgichi","8876",50900,103000,"010601-083002"],
+  ["Shaxsiy gigiyena","Ko'mir qoplamali tish cho'tkasi, binafsha","910679",25900,48900,"011008-091469"],
+  ["Shaxsiy gigiyena","Ko'mir qoplamali tish cho'tkasi, qora","910678",25900,48900,"011008-091468"],
+  ["Shaxsiy gigiyena","I Love Winter «Rezavor choy» dush geli","8225",48900,81900,"010603-099776"],
+  ["Shaxsiy gigiyena","I Love Winter «Qaymoqli latte» dush geli","8226",48900,81900,"010603-099777"],
+  ["Shaxsiy gigiyena","Qora smorodinali dush geli","20007",31900,73900,"010603-065604"],
+  ["Shaxsiy gigiyena","«Qulupnayli» dush geli","20005",31900,73900,"010603-044479"],
+  ["Shaxsiy gigiyena","Delicate Green ayollar antiperspirant spreyi","0576",43900,103000,"010602-015027"],
+  ["Shaxsiy gigiyena","Valkyrie atirli ayollar dezodorant spreyi","3523",48900,81900,"010501-038022"],
+  ["Shaxsiy gigiyena","Fleur Hypnotique sezgir teri uchun intim gigiyena geli","3553",40900,81900,"010603-068370"],
+  ["Shaxsiy gigiyena","Anion chipli kunduzgi gigiyenik prokladkalar","11289",48900,81900,"011008-00303"]
 ].map(([tur, nom, art, narx, eski, rasm, xit]) => ({ tur, nom, art, narx, eski, rasm: "rasmlar/" + rasm + ".jpg", xit: !!xit }));

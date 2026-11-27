@@ -327,6 +327,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .dream-item p{font-size:14px;opacity:.95;line-height:1.45}
 @media (max-width:980px){.dream-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.dream{padding:22px 16px}.dream-grid{grid-template-columns:1fr}}
+.sub-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sub-chip{border:1.5px solid color-mix(in srgb,var(--green) 40%,transparent);background:var(--card);color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-weight:600;font-size:13.5px;cursor:pointer}
+.sub-chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.assort{margin-top:34px;display:flex;align-items:center;gap:22px;background:linear-gradient(120deg,var(--blue),#3b5bdb 50%,var(--brand));color:#fff;border-radius:26px;padding:24px 28px;box-shadow:var(--shadow)}
+.assort-big{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(64px,10vw,96px);line-height:1}
+.assort b{display:block;font-size:clamp(20px,2.6vw,26px)}
+.assort span{display:block;opacity:.95;margin-top:6px;font-size:15px}
+.assort span b{display:inline;font-size:inherit}
+@media (max-width:560px){.assort{flex-direction:column;align-items:flex-start;gap:6px}}
 .narx-info{margin-top:10px;font-size:13.5px;color:var(--green);font-weight:600}
 .soldout{opacity:.55}
 .soldout .pimg img{filter:grayscale(1)}
@@ -620,6 +629,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div class="cert reveal"><div class="cert-ico" style="--c:var(--brand)">🐾</div><div><b>Hayvonlarda sinalmaydi</b><span>Xavfsizlik IN VITRO usullari bilan tekshiriladi.</span></div></div>
       </div>
 
+      <div class="assort reveal"><div class="assort-big">19</div><div><b>yo'nalish · minglab mahsulot</b><span>Har bir katalogda <b>1 000+</b> mahsulot va har yili <b>1 500</b> ta yangilik — kosmetikadan kiyimgacha, uy-ro'zg'or buyumlaridan salomatlik mahsulotlarigacha. Butun oila uchun kerakli hamma narsa bir joyda.</span></div></div>
       <h3 class="certs-title">19 ta yo'nalish — butun oila uchun hamma narsa</h3>
       <div class="dirs">
         <div class="dir"><span class="dir-e">💨</span><span>Kislorodli kosmetika</span></div>
@@ -900,7 +910,7 @@ $("#comebackBtn").addEventListener("click", e => {
 /* Toifalar tartibi (tugmalar shu tartibda chiqadi; ro'yxatda yo'q toifa oxiriga qo'shiladi) */
 const TOIFA_TARTIB = ["Ayollar atirlari", "Erkaklar atirlari", "Ayollar shampunlari", "Erkaklar shampunlari", "Soch bo'yoqlari",
   "Dekorativ kosmetika", "Yuz kremlari", "Yuz tozalovchilari", "Retinol 24/7 seriyasi", "TeenSkin 12+ (muammoli teri)",
-  "Ayollar parvarishi", "Erkaklar parvarishi", "Oyoq parvarishi", "Bolalar uchun", "Tish pastalari",
+  "Ayollar parvarishi", "Erkaklar parvarishi", "Oyoq parvarishi", "Bolalar uchun", "Shaxsiy gigiyena",
   "Salomatlik (BFQ)", "Kollagenlar (BFQ)", "Choylar", "Uy tozalovchilari", "Havo xushbo'ylagichlari",
   "Idish-tovoq", "Maishiy texnika", "Moda va aksessuarlar", "Paypoq va kolgotkalar", "Go'zallik aksessuarlari",
   "Sog'lom ovqatlanish", "Sog'liq gadjetlari", "Naborlar va Royal", "Qadoqlar"];
@@ -917,6 +927,7 @@ let cat = "Hammasi";
 const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2h6v3H9z"/><path d="M8 5h8l1 4v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9z"/><path d="M7 12h10"/></svg>';
 /* Toifa tanlanganda chiqadigan izoh */
 const TOIFA_IZOH = {
+  "Shaxsiy gigiyena": "<b>Shaxsiy gigiyena — har kuni kerak bo'ladigan mahsulotlar.</b> Kerakli turini tanlang:<div class=\"sub-chips\"><button class=\"sub-chip\" data-q=\"\">Hammasi</button><button class=\"sub-chip\" data-q=\"tish pastasi\">Tish pastalari</button><button class=\"sub-chip\" data-q=\"chayqatgich\">Og'iz chayqatgichlar</button><button class=\"sub-chip\" data-q=\"cho'tkasi\">Tish cho'tkalari</button><button class=\"sub-chip\" data-q=\"dush geli\">Dush gellari</button><button class=\"sub-chip\" data-q=\"dezodorant|antiperspirant\">Dezodorantlar</button><button class=\"sub-chip\" data-q=\"intim|prokladka\">Intim gigiyena</button></div>",
   "Oyoq parvarishi": "<b>Oyoq parvarishi.</b> Oyoq terlashiga qarshi Expert Pharma antiperspirant spreyi, quruq va yorilgan tovon uchun 35% mochevinali krem, charchagan oyoqlar uchun gel va har kungi namlovchi kremlar.",
   "Soch bo'yoqlari": "<b>Har xil rangdagi soch bo'yoqlari.</b> Expert turg'un krem-bo'yog'i 26 xil rangda, ipak aminokislotali Salon Care bo'yog'i 5 xil rangda. Kerakli rangni buyurtmada yozing yoki sochingiz rasmini yuboring — rang tanlashda yordam beraman.",
   "Retinol 24/7 seriyasi": "<b>Retinol 24/7 — yuz uchun to'liq parvarish seriyasi.</b> Kundalik tartib: 1) tozalovchi sut → 2) yuvish geli → 3) lifting-toner → 4) kunduzgi krem → 5) tungi krem. Beshalasi birga: <b>{RETINOL_NARX}</b> <s>{RETINOL_ESKI}</s>.<br><button class=\"btn btn-primary btn-sm\" style=\"margin-top:12px\" data-add-tur=\"Retinol 24/7 seriyasi\">Butun seriyani savatchaga qo'shish</button>",
@@ -926,23 +937,24 @@ const TOIFA_IZOH = {
   "Kollagenlar (BFQ)": "<b>Har xil maqsad uchun kollagenlar.</b> Har bir mahsulot nomida Faberlic belgilagan maqsadi yozilgan: <b>suyak va bo'g'imlar</b>, <b>yurak va qon tomirlar</b>, <b>yoshlik va go'zallik</b> (teri, soch va tirnoq uchun biotinli Collagen Beauty). Kollagenlar ham biologik faol qo'shimcha (BFQ), dori emas. Sizga qaysi biri mos kelishini tanlashda yordam beraman.",
   "Salomatlik (BFQ)": "<div class=\"bfq\"><span><i>B</i>Biologik</span><span><i>F</i>Faol</span><span><i>Q</i>Qo'shimcha</span></div><b>Salomatlikning har kungi hamrohi.</b> Faberlic biologik faol qo'shimchalari <b>(BFQ)</b> — tabiiy tarkibli mahsulotlar. Ular dori emas: kundalik ovqatlanishni to'ldirib, organizmni har kuni qo'llab-quvvatlash uchun ishlatiladi. Oilaning har bir a'zosi uchun — bolalar seriyasidan tortib kattalargacha — mos mahsulotlar bor. Har bir mahsulotning yosh chegarasi va qabul qilish tartibi qadog'ida yozilgan; tanlashda yordam beraman."
 };
-$("#catNote").addEventListener("click", e => { const b = e.target.closest("[data-add-tur]"); if (!b) return; PRODUCTS.forEach((p, i) => { if (p.tur === b.dataset.addTur) cart[i] = (cart[i] || 0) + 1; }); save(); renderCart(); toast("Butun seriya savatchaga qo'shildi"); });
+$("#catNote").addEventListener("click", e => { const sc = e.target.closest("[data-q]"); if (sc) { subQ = sc.dataset.q; document.querySelectorAll(".sub-chip").forEach(x => x.classList.toggle("on", x === sc)); renderProducts(); return; } const b = e.target.closest("[data-add-tur]"); if (!b) return; PRODUCTS.forEach((p, i) => { if (p.tur === b.dataset.addTur) cart[i] = (cart[i] || 0) + 1; }); save(); renderCart(); toast("Butun seriya savatchaga qo'shildi"); });
 function showCatNote(){ const n = $("#catNote"); let t = TOIFA_IZOH[cat]; n.hidden = !t; if (!t) return;
   const r = PRODUCTS.filter(p => p.tur === "Retinol 24/7 seriyasi");
   t = t.replace("{RETINOL_NARX}", fmt(r.reduce((a, p) => a + p.narx, 0))).replace("{RETINOL_ESKI}", fmt(r.reduce((a, p) => a + (p.eski || p.narx), 0)));
   n.innerHTML = t; }
-let qidiruv = "";
+let qidiruv = ""; let subQ = "";
 $("#search").addEventListener("input", e => { qidiruv = e.target.value.trim().toLowerCase(); renderProducts(); });
 function renderFilters(){
   $("#filters").innerHTML = "";
   cats.forEach(c => { const b = document.createElement("button"); b.className = "chip" + (c === cat ? " on" : ""); b.textContent = c;
-    b.onclick = () => { cat = c; renderFilters(); renderProducts(); showCatNote(); }; $("#filters").appendChild(b); });
+    b.onclick = () => { cat = c; subQ = ""; renderFilters(); renderProducts(); showCatNote(); }; $("#filters").appendChild(b); });
 }
 function renderProducts(){
   const box = $("#products"); box.innerHTML = "";
   ARALASH.forEach(i => { const p = PRODUCTS[i];
     if (cat !== "Hammasi" && p.tur !== cat) return;
     if (qidiruv && !(p.nom + " " + p.tur + " " + (p.art || "")).toLowerCase().includes(qidiruv)) return;
+    if (subQ && cat !== "Hammasi" && !new RegExp(subQ, "i").test(p.nom)) return;
     const el = document.createElement("div"); el.className = "card prod";
     const off = p.eski > p.narx ? Math.round((1 - p.narx / p.eski) * 100) : 0;
     el.innerHTML = `<div class="pimg">${icon}${p.rasm ? `<img src="${p.rasm}" alt="" loading="lazy" onerror="this.remove()">` : ""}${off ? `<span class="off">−${off}%</span>` : ""}</div>
